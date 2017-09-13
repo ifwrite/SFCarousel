@@ -22,7 +22,8 @@
                           @"2.jpg",
                           @"3.jpg",
                           ];
-    SFCarouselView *cycleView = [SFCarouselView carouselViewWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 180) infiniteLoop:YES imageNamesGroup:imageArr];
+    SFCarouselView *cycleView = [SFCarouselView carouselViewWithFrame:CGRectMake(0, 43, self.view.frame.size.width, 266) infiniteLoop:YES imageNamesGroup:imageArr titleGroup:@[@"宝玩精选", @"大发发打发", @"你好啊啊啊"]];
+    cycleView.autoScroll = NO;
     [self.view addSubview:cycleView];
 }
 

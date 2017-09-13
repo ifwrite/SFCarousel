@@ -10,6 +10,6 @@
 
 @interface SFCarouselCell : UICollectionViewCell
 
-@property (strong, nonatomic) UIImage *image;
+- (void)setImage:(UIImage *)image title:(NSString *)title;
 
 @end

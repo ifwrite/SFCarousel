@@ -14,6 +14,6 @@
 @property (assign, nonatomic) BOOL autoScroll;
 @property (assign, nonatomic) CGFloat autoScrollTimeInterval;
 
-+ (instancetype)carouselViewWithFrame:(CGRect)frame infiniteLoop:(BOOL)infiniteLoop imageNamesGroup:(NSArray *)imageNamesGroup;
++ (instancetype)carouselViewWithFrame:(CGRect)frame infiniteLoop:(BOOL)infiniteLoop imageNamesGroup:(NSArray *)imageNamesGroup titleGroup:(NSArray *)titleGroup;
 
 @end

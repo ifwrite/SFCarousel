@@ -38,6 +38,7 @@
 		2D08E96C1F67F66000224BA1 /* SFCarouselCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarouselCell.m; sourceTree = "<group>"; };
 		2D08E96E1F67F66D00224BA1 /* SFCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFCarouselView.h; sourceTree = "<group>"; };
 		2D08E96F1F67F66D00224BA1 /* SFCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFCarouselView.m; sourceTree = "<group>"; };
+		2D08E9711F68E0BF00224BA1 /* SFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 				2D08E96C1F67F66000224BA1 /* SFCarouselCell.m */,
 				2D08E96E1F67F66D00224BA1 /* SFCarouselView.h */,
 				2D08E96F1F67F66D00224BA1 /* SFCarouselView.m */,
+				2D08E9711F68E0BF00224BA1 /* SFConst.h */,
 			);
 			path = SFCarousel;
 			sourceTree = "<group>";
@@ -346,6 +348,7 @@
 				2D08E9631F67F61600224BA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

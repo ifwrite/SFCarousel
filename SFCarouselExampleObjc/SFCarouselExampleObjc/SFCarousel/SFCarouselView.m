@@ -8,11 +8,13 @@
 
 #import "SFCarouselView.h"
 #import "SFCarouselCell.h"
+#import "SFConst.h"
 
 @interface SFCarouselView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (strong, nonatomic) UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *imageGroup;
+@property (strong, nonatomic) NSArray *titleGroup;
 @property (assign, nonatomic) NSInteger totalItems;
 @property (weak, nonatomic) NSTimer *timer;
 @property (weak, nonatomic) UICollectionViewFlowLayout *flowLayout;
@@ -21,10 +23,11 @@
 
 @implementation SFCarouselView
 
-+ (instancetype)carouselViewWithFrame:(CGRect)frame infiniteLoop:(BOOL)infiniteLoop imageNamesGroup:(NSArray *)imageNamesGroup {
++ (instancetype)carouselViewWithFrame:(CGRect)frame infiniteLoop:(BOOL)infiniteLoop imageNamesGroup:(NSArray *)imageNamesGroup titleGroup:(NSArray *)titleGroup {
     SFCarouselView *carouselView = [[SFCarouselView alloc] initWithFrame:frame];
     carouselView.infiniteLoop = infiniteLoop;
     carouselView.imageGroup = [imageNamesGroup copy];
+    carouselView.titleGroup = [titleGroup copy];
 
     return carouselView;
 }
@@ -44,10 +47,10 @@
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumLineSpacing = 0;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.itemSize = CGSizeMake(self.bounds.size.width + 20, self.bounds.size.height);
+    flowLayout.itemSize = CGSizeMake(self.bounds.size.width + kItemMargin, self.bounds.size.height);
     self.flowLayout = flowLayout;
 
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-10, 0, self.bounds.size.width + 20, self.bounds.size.height) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(-kItemMargin / 2, 0, self.bounds.size.width + kItemMargin, self.bounds.size.height) collectionViewLayout:flowLayout];
     [self.collectionView registerClass:[SFCarouselCell class] forCellWithReuseIdentifier:NSStringFromClass([SFCarouselCell class])];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.pagingEnabled = YES;
@@ -58,15 +61,11 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
 
-//    self.collectionView.contentSize = CGSizeMake((self.bounds.size.width + 20) * 3, 0);
-
     [self addSubview:self.collectionView];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-    self.collectionView.frame = CGRectMake(-10, 0, self.bounds.size.width + 20, self.bounds.size.height);
 
     if (self.collectionView.contentOffset.x == 0 && self.totalItems > 0) {
         NSInteger targeIndex = 0;
@@ -80,10 +79,12 @@
         }
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:targeIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
     }
+
 }
 
 - (void)setImageGroup:(NSArray *)imageGroup {
     _imageGroup = imageGroup;
+    self.collectionView.contentSize = CGSizeMake((self.bounds.size.width + kItemMargin) * imageGroup.count, 0);
 
     _totalItems = self.infiniteLoop ? imageGroup.count * 100 : imageGroup.count;
 
@@ -186,8 +187,7 @@
 
     // 利用取余运算，使得图片数组里面的图片，是一组一组的排列的。
     long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
-
-    cell.image = [UIImage imageNamed:self.imageGroup[itemIndex]];
+    [cell setImage:[UIImage imageNamed:self.imageGroup[itemIndex]] title:self.titleGroup[itemIndex]];
 
     return cell;
 
